@@ -26,7 +26,7 @@ public class Main {
         Timer timer = new Timer();
 
         JLabel displayPrice = new JLabel();
-        JLabel displayText = new JLabel("<html><h1>Bienvenue</h1></html>");
+        JLabel displayText = new JLabel("<html><h1>Bienvenue sur Quizz Up</h1></html>");
 
 
 
@@ -47,11 +47,11 @@ public class Main {
         validationPanel.setBackground(Color.cyan);
 
         // Taille et emplacement des differents elements de l'application
-        boutonA.setBounds(10, 240, 100, 20);
-        boutonB.setBounds(130, 240, 100, 20);
-        boutonC.setBounds(250, 240, 100, 20);
+        boutonA.setBounds(55, 240, 100, 20);
+        boutonB.setBounds(180, 240, 100, 20);
+        boutonC.setBounds(305, 240, 100, 20);
 
-        displayText.setBounds(100, 40, 480, 20);
+        displayText.setBounds(90, 40, 480, 30);
 
 
         verification.setBounds(width/4, height/3, width, 20);
@@ -68,7 +68,7 @@ public class Main {
 
 
         validationPanel.add(verification);
-        
+
 
 // Definition de la taille de la fenetre
         window.setSize(width,height);
