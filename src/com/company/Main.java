@@ -15,50 +15,75 @@ public class Main {
     public static void main(String[] args) {
 
         // tableaux a instancier ici :
-        // TableauQuestion => [
-        //     {id: 1, question: "J'ai des mains faites pour l'or et elles sont dans la merde."};
-        //     {id: 2, question: "Moi je n'ai confiance qu'en mon manche et ma parole... l'une est de fer et l'autre d'acier !"};
-        //     {id: 3, question: "On vous a pas dit qu'il pleuvait des blacks à New-York ?"};
-        //     {id: 4, question:"La plupart des gens disent qu'on a besoin d'amour pour vivre. En fait, on a surtout besoin d'oxygène !" };
-        //     {id: 5, question: "Si vous parlez à dieu, vous êtes croyant. S'il vous répond c'est que vous êtes schyzo."};
-        //     {id: 6, question: "Le coeur d'une femme est un océan de secrets."};
-        //     {id: 7, question: "C'est trop calme... j'aime pas trop beaucoup ça... J'préfère quand c'est un peu trop plus moins calme..."};
-        //     {id: 8, question: "C'est difficile de mettre une laisse à un chien une fois qu'on lui a posé une couronne sur la tête."};
-        //     {id: 9, question: "J'étais prêt à tourner la page, mais c'est la page qui ne veut pas se tourner."};
-        //     {id: 10, question: "Mais mélanger amour et boulot ça ne marche jamais…"};
-        //     {id: 11, question: "La mort est une journée qui mérite d’être vécue."};
-        //     {id: 12, question: "Pas de bras, pas de chocolat."};
-        //     {id: 13, question: "Je courrais toujours pour aller partout, mais je ne pensais pas pour autant que ça allait me mener quelque part."};
-        //     {id: 14, question: "Il faut du courage pour affronter ses ennemis mais il en faut encore plus pour affronter ses amis…"};
-        //     {id: 15, question: "T’es pas mouru l’âne, t’es pas mouru."};
-        //     {id: 16, question: "Le rêve semble réel quand on y est, ce n’est que quand on se réveille qu’on se rend compte qu’il avait quelque chose d’étrange…"};
-        //     {id: 17, question: "Je t’aime plus que trois fois mille."};
-        //     {id: 18, question: "Dis-moi pas qu'c'est pas vrai !"};
-        //     {id: 19, question: "Ouh pinaise !"};
-        //     {id: 20, question: };
-        // ];
-        // TableauReponse = [
-        //     {id: 1, reponse: "Scarface", idQuestion: }
-        //     {id: 2, reponse: "Scarface", idQuestion: }
-        //     {id: 3, reponse: "Men In Black" , idQuestion: }
-        //     {id: 4, reponse: "Titanic", idQuestion: }
-        //     {id: 5, reponse: "Titanic", idQuestion: }
-        //     {id: 6, reponse: "Astérix Et Obélix : Mission Cléopâtre", idQuestion: }
-        //     {id: 7, reponse: "Game of Thrones", idQuestion: }
-        //     {id: 8, reponse: "Grey's Anatomy", idQuestion: }
-        //     {id: 9, reponse: "La casa de papel", idQuestion: }
-        //     {id: 10, reponse: "Pirates des Caraïbes, jusqu’au bout du monde", idQuestion: }
-        //     {id: 11, reponse: "Intouchable", idQuestion: }
-        //     {id: 12, reponse: "Forrest Gump", idQuestion: }
-        //     {id: 13, reponse: "Harry Potter", idQuestion: }
-        //     {id: 14, reponse: "Shrek", idQuestion: }
-        //     {id: 15, reponse: "Inception", idQuestion: }
-        //     {id: 16, reponse: "Avenger: Endgame", idQuestion: }
-        //     {id: 17, reponse: "H", idQuestion: }
-        //     {id: 18, reponse: "Les Simpson", idQuestion: }
-        //     {id: 19, reponse: , idQuestion: }
-        //     {id: 20, reponse: , idQuestion: }
-        // ];
+        String tableauQuestions[] = 
+        {
+        "J'ai des mains faites pour l'or et elles sont dans la merde.",
+        "Moi je n'ai confiance qu'en mon manche et ma parole... l'une est de fer et l'autre d'acier !",
+        "On vous a pas dit qu'il pleuvait des blacks à New-York ?",
+        "La plupart des gens disent qu'on a besoin d'amour pour vivre. En fait, on a surtout besoin d'oxygène !" ,
+        "Si vous parlez à dieu, vous êtes croyant. S'il vous répond c'est que vous êtes schyzo.",
+        "Le coeur d'une femme est un océan de secrets.",
+        "C'est trop calme... j'aime pas trop beaucoup ça... J'préfère quand c'est un peu trop plus moins calme...",
+        "C'est difficile de mettre une laisse à un chien une fois qu'on lui a posé une couronne sur la tête.",
+        "J'étais prêt à tourner la page, mais c'est la page qui ne veut pas se tourner.",
+        "Mais mélanger amour et boulot ça ne marche jamais…",
+        "La mort est une journée qui mérite d’être vécue.",
+        "Pas de bras, pas de chocolat.",
+        "Je courrais toujours pour aller partout, mais je ne pensais pas pour autant que ça allait me mener quelque part.",
+        "Il faut du courage pour affronter ses ennemis mais il en faut encore plus pour affronter ses amis…",
+        "T’es pas mouru l’âne, t’es pas mouru.",
+        "Le rêve semble réel quand on y est, ce n’est que quand on se réveille qu’on se rend compte qu’il avait quelque chose d’étrange…",
+        "Je t’aime plus que trois fois mille.",
+        "Dis-moi pas qu'c'est pas vrai !",
+        "Ouh pinaise !"
+        };
+        
+    
+    
+    String tableauPropositions[] = {
+        {"a.Le Parrain", "b.Scarface", "c.Jacque mesrine"},
+        {"a.Scarface", "b.American Gangster", "c.L'impasse"},
+        {"a.Bad Boys", "b.Hancock", "c.Men In Black"},
+        {"a.Grey's Anatomy", "b.Docteur House", "c.Mentalist"},
+        {"a.Prison Break", "b.Grey's Anatomy", "c.Docteur House"},
+        {"a.Roméo et Juliette", "b.Titanic", "c.Aladdin"},
+        {"a.Suicide Squad", "b.Star Wars", "c.Astérix Et Obélix"},
+        {"a.The Last Kingdom", "b.Game of Thrones", "c.Vikings"},
+        {"a.Grey's Anatomy", "b.Docteur House", "c.Gossip Girl"},
+        {"a.La casa de papel", "b.Prison Break", "c.El.Chapo"},
+        {"a.Game of Thrones", "b.Suicide Squad", "c.Pirates des Caraïbes"},
+        {"a.H: la serie", "b.Intouchable", "c.Les Simpson"},
+        {"a.Titanic", "b.Forrest Gump", "c.La ligne verte"},
+        {"a.Harry Potter", "b.300", "c.Le roi lion"},
+        {"a.Les Simpson", "b.Le roi lion", "c.Shrek"},
+        {"a.Matrix", "b.Hancock", "c.Inception"},
+        {"a.Avenger: Endgame", "b.Aladdin", "c.Titanic"},
+        {"a.Astérix Et Obélix", "b.Les visiteurs", "c.H: la serie"},
+        {"a.H: la serie", "b.Les Simpson", "c.South Park"},
+    };
+    
+    
+    String tableauReponses[] = {
+        "b",
+        "a",
+        "c",
+        "b",
+        "c",
+        "b",
+        "c",
+        "b",
+        "a",
+        "a",
+        "c",
+        "b",
+        "b",
+        "a",
+        "c",
+        "c",
+        "a",
+        "c",
+        "b"
+    };
 
 
         // instanciation des objets
