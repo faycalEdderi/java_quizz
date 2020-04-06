@@ -27,14 +27,13 @@ public class Main {
 
         JLabel displayPrice = new JLabel();
         JLabel displayText = new JLabel("<html><h1>Bienvenue</h1></html>");
-        JTextArea displayList = new JTextArea();
-        displayList.setEditable(false);
+
+
 
         JPanel validationPanel = new JPanel();
         JLabel verification = new JLabel();
 
-        JButton confirmation = new JButton("Confirmer");
-        JButton retour = new JButton("Retour");
+
 
 
         // variables
@@ -53,13 +52,11 @@ public class Main {
         boutonC.setBounds(250, 240, 100, 20);
 
         displayText.setBounds(100, 40, 480, 20);
-        displayList.setBounds(10, 75, 420, 150);
-        displayList.setVisible(false);
+
 
         verification.setBounds(width/4, height/3, width, 20);
 
-        confirmation.setBounds(width/3, 240, 100, 20);
-        retour.setBounds(250, 240, 100, 20);
+
 
         // Ajout des elements aux panels
         panel.add(boutonA);
@@ -67,11 +64,11 @@ public class Main {
         panel.add(boutonC);
         panel.add(displayPrice);
         panel.add(displayText);
-        panel.add(displayList);
 
-        validationPanel.add(confirmation);
+
+
         validationPanel.add(verification);
-        validationPanel.add(retour);
+        
 
 // Definition de la taille de la fenetre
         window.setSize(width,height);
