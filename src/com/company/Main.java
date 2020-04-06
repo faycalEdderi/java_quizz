@@ -14,6 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // tableaux a instancier ici :
+
 
 
         // instanciation des objets
