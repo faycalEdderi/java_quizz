@@ -196,17 +196,18 @@ public class Main {
                             }
 
                             String getReponse = reponse.getText();
-                            int resultat = 0;
                             System.out.println("g : "+ g);
                           if(g >= 0 ){
                                 String getBonneReponse = tableauReponses[g];
                                 System.out.println("Bonne reponse : " + getBonneReponse);
                                 System.out.println("reponse choisie: " + getReponse);
-                                  if ( getBonneReponse == getReponse ) {
-                                      resultat = resultat + 1;
-                                      System.out.println(resultat);
-                                  }
+                              if ( getBonneReponse.equals(getReponse) ) {
+                                  resultat = resultat + i;
+                                  System.out.println("resultat : " + resultat);
+                              }
+
                             }
+
 
 
                             f += i;
