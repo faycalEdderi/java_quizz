@@ -38,7 +38,8 @@ public class Main {
                         "Le rêve semble réel quand on y est, ce n’est que quand on se réveille qu’on se rend compte qu’il avait quelque chose d’étrange…",
                         "Je t’aime plus que trois fois mille.",
                         "Dis-moi pas qu'c'est pas vrai !",
-                        "Ouh pinaise !"
+                        "Ouh pinaise !",
+                        "Un fil invisible ? C'est comme un homme invisible mais en forme de fil"
                 };
 
 
@@ -63,25 +64,34 @@ public class Main {
                 {"a.Avenger: Endgame", "b.Aladdin", "c.Titanic"},
                 {"a.Astérix Et Obélix", "b.Les visiteurs", "c.H: la serie"},
                 {"a.H: la serie", "b.Les Simpson", "c.South Park"},
+                {"a.Les Inconnus", "b.La Tour Montparnasse Infernal", "c. Intouchable"},
         };
 
 
-        String tableauReponses[] = {"b", "a", "c", "b", "c", "b", "c", "b", "a", "a", "c", "b", "b", "a", "c", "c", "a", "c", "b"};
+        String tableauReponses[] = {"b", "a", "c", "b", "c", "b", "c", "b", "a", "a", "c", "b", "b", "a", "c", "c", "a", "c", "b", "b"};
 
 
 
         // instanciation des objets
         JFrame window = new JFrame("Quizz Up");
         JPanel accueilPanel = new JPanel();
-        JButton commencer = new JButton("Commencer");
-        JButton boutonA = new JButton("Reponse A");
-        JButton boutonB = new JButton("Reponse B");
-        JButton boutonC = new JButton("Reponse C");
-        JButton stopMusic = new JButton("Stop Music");
+        JButton commencer = new JButton("Lancer le Quizz");
+
+        JLabel question = new JLabel("Les citation vont s'afficher ici");
+
+        JTextField reponse = new JTextField();
+        reponse.setEditable(false);
+        JButton valider = new JButton("Commencer !");
+        JButton select = new JButton("Confimer");
+
+        JLabel propositionA = new JLabel();
+        JLabel propositionB = new JLabel();
+        JLabel propositionC = new JLabel();
+
 
         Timer timer = new Timer();
 
-        JLabel displayText = new JLabel("<html><h1>Question : </h1></html>");
+        JLabel displayText = new JLabel("<html><h2>De quelle serie ou film vient cette citation ? : </h2></html>");
         JLabel bienvenueText = new JLabel("<html><h1>Bienvenue sur Quizz Up</h1></html>");
 
 
@@ -89,8 +99,8 @@ public class Main {
 
 
         // variables
-        int width = 450;
-        int height = 300;
+        int width = 720;
+        int height = 480;
         // Configuration des panel et de la fenetre
         window.setResizable(false);
         accueilPanel.setLayout(null);
@@ -100,31 +110,49 @@ public class Main {
         questionPanel.setBackground(Color.cyan);
 
         // Taille et emplacement des differents elements de l'application
-        commencer.setBounds(125, 150, 200, 30);
-        boutonA.setBounds(55, 240, 100, 20);
-        boutonB.setBounds(180, 240, 100, 20);
-        boutonC.setBounds(305, 240, 100, 20);
-        stopMusic.setBounds(0, 240, 100, 20);
-        displayText.setBounds(180, 20, 480, 30);
+        commencer.setBounds(250, 250, 200, 30);
 
-        bienvenueText.setBounds(90, 40, 480, 30);
+        //boutonA.setBounds(55, 240, 100, 20);
+        reponse.setBounds(180, 240, 100, 20);
+        reponse.setVisible(false);
+        valider.setBounds(300, 240, 150, 20);
+        select.setBounds(300, 240, 150, 20);
+        select.setVisible(false);
 
+        propositionA.setBounds(100, 120, 200, 20);
+
+
+        propositionB.setBounds(250, 120, 200, 20);
+
+        propositionC.setBounds(450, 120, 200, 20);
+
+
+
+
+        displayText.setBounds(30, 20, 480, 30);
+        question.setBounds(150, 70, 480, 30);
+
+        bienvenueText.setBounds(200, 40, 480, 30);
 
         accueilPanel.setBounds(width/4, height/3, width, 20);
 
 
-
         // Ajout des elements aux panels
 
-        questionPanel.add(boutonA);
-        questionPanel.add(boutonB);
-        questionPanel.add(boutonC);
+        questionPanel.add(valider);
+        questionPanel.add(select);
+        questionPanel.add(reponse);
+
+        questionPanel.add(propositionA);
+        questionPanel.add(propositionB);
+        questionPanel.add(propositionC);
+
         questionPanel.add(displayText);
+        questionPanel.add(question);
 
 
 
         accueilPanel.add(commencer);
-        accueilPanel.add(stopMusic);
         accueilPanel.add(bienvenueText);
 
 
@@ -133,7 +161,81 @@ public class Main {
         window.setSize(width,height);
 
 
+        valider.addActionListener(new ActionListener() {
+            int i = 1;
+            int f = 0;
+            int g = -1;
+            int resultat = 0;
 
+            public void actionPerformed(ActionEvent e) {
+
+
+                valider.setVisible(false);
+                select.setVisible(true);
+                reponse.setEditable(true);
+                reponse.setVisible(true);
+
+
+
+
+
+
+                if(f<= 20) {
+
+                    select.addActionListener(new ActionListener() {
+                        int f = 0;
+                        public void actionPerformed(ActionEvent e) {
+
+                            question.setText(" \" "+ tableauQuestions[f] + " \" ");
+                            for (int j = 0; j < 1; j++) {
+                                propositionA.setText(tableauPropositions[f][j]);
+                                propositionB.setText(tableauPropositions[f][j + 1]);
+                                propositionC.setText(tableauPropositions[f][j + 2]);
+
+
+                            }
+
+                            String getReponse = reponse.getText();
+                            int resultat = 0;
+                            System.out.println("g : "+ g);
+                          if(g >= 0 ){
+                                String getBonneReponse = tableauReponses[g];
+                                System.out.println("Bonne reponse : " + getBonneReponse);
+                                System.out.println("reponse choisie: " + getReponse);
+                                  if ( getBonneReponse == getReponse ) {
+                                      resultat = resultat + 1;
+                                      System.out.println(resultat);
+                                  }
+                            }
+
+
+                            f += i;
+                            g +=1;
+                            System.out.println(f);
+                            if(f == 20){
+                                question.setText("FIN !");
+                                reponse.setVisible(false);
+                                propositionA.setVisible(false);
+                                propositionB.setVisible(false);
+                                propositionC.setVisible(false);
+                                select.setVisible(false);
+
+                            }
+
+                        }
+                    });
+
+
+
+                }
+
+
+
+                }
+
+
+
+        });
 
 
         // affichage de la fenetre est visible
@@ -142,20 +244,13 @@ public class Main {
 
         // Changer de panel pour commencer la partie
         commencer.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 window.setContentPane(questionPanel);
                 window.invalidate();
                 window.validate();
             }
         });
-        // Changer de panel pour commencer la partie
-        stopMusic.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
 
     }
 
