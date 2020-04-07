@@ -14,11 +14,14 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.io.File;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
 
         // tableaux a de questions et reponses :
@@ -245,6 +248,15 @@ public class Main {
                                 question.setBounds(200, 50, 100, 15);
                                 displayText.setText("<html><h2>Votre score est de : "+ resultat + "/20</h2></html>");
                                 displayText.setBounds(180, 150, 300, 150);
+                                new java.util.Timer().schedule(
+                                        new java.util.TimerTask() {
+                                            @Override
+                                            public void run() {
+                                                window.dispose();
+                                            }
+                                        },
+                                        10000
+                                );
                             }
                         }
                     });
