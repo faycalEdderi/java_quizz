@@ -32,10 +32,10 @@ public class Main {
                         "Mais mélanger amour et boulot ça ne marche jamais…",
                         "La mort est une journée qui mérite d’être vécue.",
                         "Pas de bras, pas de chocolat.",
-                        "Je courrais toujours pour aller partout, mais je ne pensais pas pour autant que ça allait me mener quelque part.",
+                        "La vie c'est comme une boite de chocolat.",
                         "Il faut du courage pour affronter ses ennemis mais il en faut encore plus pour affronter ses amis…",
                         "T’es pas mouru l’âne, t’es pas mouru.",
-                        "Le rêve semble réel quand on y est, ce n’est que quand on se réveille qu’on se rend compte qu’il avait quelque chose d’étrange…",
+                        "Barrez-vous cons de mimes !",
                         "Je t’aime plus que trois fois mille.",
                         "Dis-moi pas qu'c'est pas vrai !",
                         "Ouh pinaise !",
@@ -60,11 +60,11 @@ public class Main {
                 {"a.Titanic", "b.Forrest Gump", "c.La ligne verte"},
                 {"a.Harry Potter", "b.300", "c.Le roi lion"},
                 {"a.Les Simpson", "b.Le roi lion", "c.Shrek"},
-                {"a.Matrix", "b.Hancock", "c.Inception"},
+                {"a.Les Bronzés", "b.OSS 117", "c.La Cité de la peur"},
                 {"a.Avenger: Endgame", "b.Aladdin", "c.Titanic"},
                 {"a.Astérix Et Obélix", "b.Les visiteurs", "c.H: la serie"},
                 {"a.H: la serie", "b.Les Simpson", "c.South Park"},
-                {"a.Les Inconnus", "b.La Tour Montparnasse Infernal", "c. Intouchable"},
+                {"a.Les Trois Freres", "b.La Tour Montparnasse Infernal", "c. Intouchable"},
         };
 
 
@@ -81,15 +81,16 @@ public class Main {
 
         JTextField reponse = new JTextField();
         reponse.setEditable(false);
-        JButton valider = new JButton("Commencer !");
+        JButton valider = new JButton("Suivant");
         JButton select = new JButton("Confimer");
+
+        JTextArea regles = new JTextArea();
+        regles.setEditable(false);
 
         JLabel propositionA = new JLabel();
         JLabel propositionB = new JLabel();
         JLabel propositionC = new JLabel();
 
-
-        Timer timer = new Timer();
 
         JLabel displayText = new JLabel("<html><h2>De quelle serie ou film vient cette citation ? : </h2></html>");
         JLabel bienvenueText = new JLabel("<html><h1>Bienvenue sur Quizz Up</h1></html>");
@@ -112,7 +113,8 @@ public class Main {
         // Taille et emplacement des differents elements de l'application
         commencer.setBounds(250, 250, 200, 30);
 
-        //boutonA.setBounds(55, 240, 100, 20);
+        regles.setBounds(150, 75, 420, 150);
+        regles.setVisible(false);
         reponse.setBounds(180, 240, 100, 20);
         reponse.setVisible(false);
         valider.setBounds(300, 240, 150, 20);
@@ -120,17 +122,11 @@ public class Main {
         select.setVisible(false);
 
         propositionA.setBounds(100, 120, 200, 20);
-
-
         propositionB.setBounds(250, 120, 200, 20);
-
         propositionC.setBounds(450, 120, 200, 20);
 
-
-
-
         displayText.setBounds(30, 20, 480, 30);
-        question.setBounds(150, 70, 480, 30);
+        question.setBounds(80, 70, 700, 30);
 
         bienvenueText.setBounds(200, 40, 480, 30);
 
@@ -149,6 +145,7 @@ public class Main {
 
         questionPanel.add(displayText);
         questionPanel.add(question);
+        questionPanel.add(regles);
 
 
 
@@ -160,7 +157,7 @@ public class Main {
 // Definition de la taille de la fenetre
         window.setSize(width,height);
 
-
+// changement de page
         valider.addActionListener(new ActionListener() {
             int i = 1;
             int f = 0;
@@ -172,26 +169,31 @@ public class Main {
 
                 valider.setVisible(false);
                 select.setVisible(true);
-                reponse.setEditable(true);
-                reponse.setVisible(true);
+                regles.setText("Veuillez taper la bonne reponse uniquement la lettre 'a' 'b' ou 'c'");
+                select.setText("C'est partie !");
 
 
 
 
 
-
+// debut de la partie
                 if(f<= 20) {
 
                     select.addActionListener(new ActionListener() {
-                        int f = 0;
                         public void actionPerformed(ActionEvent e) {
+                            select.setText("Confirmer");
+                            question.setVisible(true);
+                            regles.setVisible(false);
+                            displayText.setText("<html><h2>De quelle serie ou film vient cette citation ? : </h2></html>");
+
+                            reponse.setEditable(true);
+                            reponse.setVisible(true);
 
                             question.setText(" \" "+ tableauQuestions[f] + " \" ");
                             for (int j = 0; j < 1; j++) {
                                 propositionA.setText(tableauPropositions[f][j]);
                                 propositionB.setText(tableauPropositions[f][j + 1]);
                                 propositionC.setText(tableauPropositions[f][j + 2]);
-
 
                             }
 
@@ -205,21 +207,24 @@ public class Main {
                                   resultat = resultat + i;
                                   System.out.println("resultat : " + resultat);
                               }
+                              reponse.setText("");
 
                             }
-
-
 
                             f += i;
                             g +=1;
                             System.out.println(f);
                             if(f == 20){
-                                question.setText("FIN !");
+
                                 reponse.setVisible(false);
                                 propositionA.setVisible(false);
                                 propositionB.setVisible(false);
                                 propositionC.setVisible(false);
                                 select.setVisible(false);
+                                question.setText("<html><h2>FINI !</h2></html>");
+                                question.setBounds(200, 50, 100, 15);
+                                displayText.setText("<html><h2>Votre score est de : "+ resultat + "/20</h2></html>");
+                                displayText.setBounds(180, 150, 300, 150);
 
                             }
 
@@ -246,6 +251,10 @@ public class Main {
         // Changer de panel pour commencer la partie
         commencer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                regles.setText("Le but du jeu est de trouver a quel film ou serie appartienne les citations \r\n" + "Il n'y a qu'une seule proposition de bonnen sur les 3");
+                regles.setVisible(true);
+                question.setVisible(false);
+                displayText.setText("Lancer la partie ?");
                 window.setContentPane(questionPanel);
                 window.invalidate();
                 window.validate();
