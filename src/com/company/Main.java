@@ -1,4 +1,7 @@
 package com.company;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,10 +9,11 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.util.Timer;
-
-
-
-
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.*;
+import java.io.File;
 
 public class Main {
 
@@ -20,29 +24,27 @@ public class Main {
         // tableaux a de questions et reponses :
         String tableauQuestions[] =
                 {
-                        "J'ai des mains faites pour l'or et elles sont dans la merde.",
-                        "Moi je n'ai confiance qu'en mon manche et ma parole... l'une est de fer et l'autre d'acier !",
-                        "On vous a pas dit qu'il pleuvait des blacks à New-York ?",
-                        "La plupart des gens disent qu'on a besoin d'amour pour vivre. En fait, on a surtout besoin d'oxygène !" ,
-                        "Si vous parlez à dieu, vous êtes croyant. S'il vous répond c'est que vous êtes schyzo.",
-                        "Le coeur d'une femme est un océan de secrets.",
-                        "C'est trop calme... j'aime pas trop beaucoup ça... J'préfère quand c'est un peu trop plus moins calme...",
-                        "C'est difficile de mettre une laisse à un chien une fois qu'on lui a posé une couronne sur la tête.",
-                        "J'étais prêt à tourner la page, mais c'est la page qui ne veut pas se tourner.",
-                        "Mais mélanger amour et boulot ça ne marche jamais…",
-                        "La mort est une journée qui mérite d’être vécue.",
-                        "Pas de bras, pas de chocolat.",
-                        "La vie c'est comme une boite de chocolat.",
-                        "Il faut du courage pour affronter ses ennemis mais il en faut encore plus pour affronter ses amis…",
-                        "T’es pas mouru l’âne, t’es pas mouru.",
-                        "Barrez-vous cons de mimes !",
-                        "Je t’aime plus que trois fois mille.",
-                        "Dis-moi pas qu'c'est pas vrai !",
-                        "Ouh pinaise !",
-                        "Un fil invisible ? C'est comme un homme invisible mais en forme de fil"
+                    "J'ai des mains faites pour l'or et elles sont dans la merde.",
+                    "Moi je n'ai confiance qu'en mon manche et ma parole... l'une est de fer et l'autre d'acier !",
+                    "On vous a pas dit qu'il pleuvait des blacks à New-York ?",
+                    "La plupart des gens disent qu'on a besoin d'amour pour vivre. En fait, on a surtout besoin d'oxygène !" ,
+                    "Si vous parlez à dieu, vous êtes croyant. S'il vous répond c'est que vous êtes schyzo.",
+                    "Le coeur d'une femme est un océan de secrets.",
+                    "C'est trop calme... j'aime pas trop beaucoup ça... J'préfère quand c'est un peu trop plus moins calme...",
+                    "C'est difficile de mettre une laisse à un chien une fois qu'on lui a posé une couronne sur la tête.",
+                    "J'étais prêt à tourner la page, mais c'est la page qui ne veut pas se tourner.",
+                    "Mais mélanger amour et boulot ça ne marche jamais…",
+                    "La mort est une journée qui mérite d’être vécue.",
+                    "Pas de bras, pas de chocolat.",
+                    "La vie c'est comme une boite de chocolat.",
+                    "Il faut du courage pour affronter ses ennemis mais il en faut encore plus pour affronter ses amis…",
+                    "T’es pas mouru l’âne, t’es pas mouru.",
+                    "Barrez-vous cons de mimes !",
+                    "Je t’aime plus que trois fois mille.",
+                    "Dis-moi pas qu'c'est pas vrai !",
+                    "Ouh pinaise !",
+                    "Un fil invisible ? C'est comme un homme invisible mais en forme de fil"
                 };
-
-
 
         String tableauPropositions[][] = {
                 {"a.Le Parrain", "b.Scarface", "c.Jacque mesrine"},
@@ -67,10 +69,7 @@ public class Main {
                 {"a.Les Trois Freres", "b.La Tour Montparnasse Infernal", "c. Intouchable"},
         };
 
-
         String tableauReponses[] = {"b", "a", "c", "b", "c", "b", "c", "b", "a", "a", "c", "b", "b", "a", "c", "c", "a", "c", "b", "b"};
-
-
 
         // instanciation des objets
         JFrame window = new JFrame("Quizz Up");
@@ -83,6 +82,8 @@ public class Main {
         reponse.setEditable(false);
         JButton valider = new JButton("Suivant");
         JButton select = new JButton("Confimer");
+        JButton musicStop = new JButton("Music Off");
+
 
         JTextArea regles = new JTextArea();
         regles.setEditable(false);
@@ -120,6 +121,8 @@ public class Main {
         valider.setBounds(300, 240, 150, 20);
         select.setBounds(300, 240, 150, 20);
         select.setVisible(false);
+        musicStop.setBounds(15, 400, 140, 20);
+
 
         propositionA.setBounds(100, 120, 200, 20);
         propositionB.setBounds(250, 120, 200, 20);
@@ -146,7 +149,7 @@ public class Main {
         questionPanel.add(displayText);
         questionPanel.add(question);
         questionPanel.add(regles);
-
+        questionPanel.add(musicStop);
 
 
         accueilPanel.add(commencer);
@@ -165,21 +168,42 @@ public class Main {
             int resultat = 0;
 
             public void actionPerformed(ActionEvent e) {
-
-
                 valider.setVisible(false);
                 select.setVisible(true);
                 regles.setText("Veuillez taper la bonne reponse uniquement la lettre 'a' 'b' ou 'c'");
                 select.setText("C'est partie !");
 
 
+                try{
+                    File musicPath = new File("music.wav");
+                    if(musicPath.exists() ){
+                        AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(audioInput);
+                        clip.start();
+                        clip.loop(Clip.LOOP_CONTINUOUSLY);
 
+                        // Fonction pour arreter la musique
+                        musicStop.addActionListener(new ActionListener() {
 
+                            public void actionPerformed(ActionEvent e) {
+                                clip.stop();
+                            }
+
+                        });
+
+                    }
+
+                }catch(Exception ex){
+
+                    ex.printStackTrace();
+                }
 
 // debut de la partie
                 if(f<= 20) {
 
                     select.addActionListener(new ActionListener() {
+
                         public void actionPerformed(ActionEvent e) {
                             select.setText("Confirmer");
                             question.setVisible(true);
@@ -196,7 +220,6 @@ public class Main {
                                 propositionC.setText(tableauPropositions[f][j + 2]);
 
                             }
-
                             String getReponse = reponse.getText();
                             System.out.println("g : "+ g);
                           if(g >= 0 ){
@@ -208,14 +231,11 @@ public class Main {
                                   System.out.println("resultat : " + resultat);
                               }
                               reponse.setText("");
-
                             }
-
                             f += i;
                             g +=1;
                             System.out.println(f);
                             if(f == 20){
-
                                 reponse.setVisible(false);
                                 propositionA.setVisible(false);
                                 propositionB.setVisible(false);
@@ -225,24 +245,12 @@ public class Main {
                                 question.setBounds(200, 50, 100, 15);
                                 displayText.setText("<html><h2>Votre score est de : "+ resultat + "/20</h2></html>");
                                 displayText.setBounds(180, 150, 300, 150);
-
                             }
-
                         }
                     });
-
-
-
                 }
-
-
-
                 }
-
-
-
         });
-
 
         // affichage de la fenetre est visible
         window.setContentPane(accueilPanel);
@@ -260,9 +268,5 @@ public class Main {
                 window.validate();
             }
         });
-
-
     }
-
-
 }
